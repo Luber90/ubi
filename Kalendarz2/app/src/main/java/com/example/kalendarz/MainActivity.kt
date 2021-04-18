@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
+import android.widget.Toast
 import java.util.*
 
 
@@ -46,7 +47,22 @@ class MainActivity : AppCompatActivity() {
         year.maxValue = 2200
         year.value = 2020
         year.wrapSelectorWheel = true
-        year.setOnValueChangedListener(){picker, oldVal, newVal ->
+
+        val cal = wielkanoc(2020)
+        val wiel: TextView = findViewById(R.id.wielkanoc_date)
+        val pop: TextView = findViewById(R.id.popielec_date)
+        val cialo: TextView = findViewById(R.id.boze_cialo_date)
+        val adwent: TextView = findViewById(R.id.adwent_date)
+
+        wiel.text = getString(R.string.data, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR))
+        cal.add(Calendar.DATE, 60)
+        cialo.text = getString(R.string.data, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR))
+        cal.add(Calendar.DATE, -106)
+        pop.text = getString(R.string.data, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR))
+        val tmp = adwent(2020)
+        adwent.text = getString(R.string.data, tmp.get(Calendar.DAY_OF_MONTH), tmp.get(Calendar.MONTH)+1, tmp.get(Calendar.YEAR))
+
+        year.setOnValueChangedListener(){_, _, newVal ->
             val cal = wielkanoc(newVal)
             val wiel: TextView = findViewById(R.id.wielkanoc_date)
             val pop: TextView = findViewById(R.id.popielec_date)
@@ -67,14 +83,17 @@ class MainActivity : AppCompatActivity() {
         robocze.setOnClickListener(){
             val i = Intent(this, Robocze::class.java)
             startActivity(i)
-            true
         }
         val niedziele: Button = findViewById(R.id.niedzieleButt)
         niedziele.setOnClickListener(){
-            val i = Intent(this, Niedziele::class.java)
-            i.putExtra("year", year.value.toString())
-            startActivity(i)
-            true
+            if(year.value >= 2020) {
+                val i = Intent(this, Niedziele::class.java)
+                i.putExtra("year", year.value.toString())
+                startActivity(i)
+            }
+            else{
+                Toast.makeText(this,"Proszę podać rok po roku 2020.", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
