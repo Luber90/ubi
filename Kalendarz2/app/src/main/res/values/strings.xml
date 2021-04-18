@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Kalendarz</string>
+    <string name="butt1">niedziele</string>
+    <string name="butt2">dni robocze</string>
+    <string name="popiel">Popielec:</string>
+    <string name="wielkanoc">Wielkanoc:</string>
+    <string name="cialo">Boże ciało:</string>
+    <string name="adwent">Adwent:</string>
+    <string name="data">%1$d.%2$d.%3$d</string>
+    <string name="dni">Dni kalendarzowe:</string>
+    <string name="dnir">Dni robocze:</string>
+    <string name="butt3">Ok</string>
+    <string name="datap">Data początkowa:</string>
+    <string name="datak">Data końcowa:</string>
+    <string name="title">Niedziele handlowe %1$d:</string>
+</resources>
